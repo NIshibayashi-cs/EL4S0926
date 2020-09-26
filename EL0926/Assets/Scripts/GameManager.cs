@@ -12,6 +12,12 @@ public class GameManager : MonoBehaviour
     GameObject failed_VFX;
 
     [SerializeField]
+    AudioSource clear_SE;
+
+    [SerializeField]
+    AudioSource failed_SE;
+
+    [SerializeField]
     SimpleFadeIn fade;
 
     bool clicked = false;
@@ -35,6 +41,8 @@ public class GameManager : MonoBehaviour
             //フラグセットしてResultへ
             PlayerPrefs.SetInt("GameClear", clear ? 1 : 0);
             GameObject vfx = Instantiate(clear ? clear_VFX : failed_VFX);
+            AudioSource se = clear ? clear_SE : failed_SE;
+            se.PlayOneShot(se.clip);
             vfx.transform.position = hit.transform.position;
             clicked = true;
             Invoke("FadeOut", 0.5f);
@@ -64,7 +72,7 @@ public class GameManager : MonoBehaviour
         {
             var script = target.GetComponent<Sensei>();
             if (script == null) continue;
-            counts[script.Type]++; 
+            counts[script.Type]++;
         }
 
         //ニッチ(一番数が少ないType)を探す
