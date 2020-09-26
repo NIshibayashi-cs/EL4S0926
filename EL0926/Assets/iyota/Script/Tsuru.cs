@@ -10,6 +10,7 @@ public class Tsuru : Sensei
     protected override void Start()
     {
         base.Start();
+        type = 4;
     }
 
     // Update is called once per frame
