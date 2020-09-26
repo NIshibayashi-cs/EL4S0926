@@ -27,7 +27,18 @@ public class SoundController : MonoBehaviour
     }
 
 
-    // Start is called before the first frame update
+    void Awake()
+    {
+        if(m_instance == null)
+        {
+            m_instance = this;
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+    }
+
     void Start()
     {
         m_audio_source = GetComponent<AudioSource>();
