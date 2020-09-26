@@ -4,14 +4,12 @@ using UnityEngine;
 
 public class Akiyama : Sensei
 {
-    private Vector2 moveDir;
-    private readonly float moveSpeed = 0.06f;
+    private readonly float moveSpeed = 0.03f;
 
     // Start is called before the first frame update
     protected override void Start()
     {
         base.Start();
-        moveDir = new Vector2(-1.0f, 1.0f).normalized;
     }
 
     // Update is called once per frame
@@ -27,12 +25,12 @@ public class Akiyama : Sensei
     {
         transform.position += (Vector3)moveDir * moveSpeed;
 
-        if (transform.position.x >= 6.5f
-            || transform.position.x <= -6.5f)
+        if (transform.position.x >= base.limmitPos.right
+            || transform.position.x <= base.limmitPos.left)
             moveDir.x *= -1;
 
-        if(transform.position.y >= 5.5f
-            || transform.position.y <= -5.5f)
+        if (transform.position.y >= base.limmitPos.up
+            || transform.position.y <= base.limmitPos.down)
             moveDir.y *= -1;
     }
 }
