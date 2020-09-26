@@ -25,15 +25,15 @@ public class GameManager : MonoBehaviour
             if (script == null) return;
 
             //ニッチかどうか判定
-            Debug.Log(script.ToString());
+            Debug.Log("ID:" + script.Type + " clicked. =>" + script.ToString());
 
-            bool clear = false;
+            bool clear = GetNicheID() == script.Type;
 
             //フラグセットしてResultへ
             PlayerPrefs.SetInt("GameClear", clear ? 1 : 0);
-            clicked = true;
             GameObject vfx = Instantiate(clear ? clear_VFX : failed_VFX);
             vfx.transform.position = hit.transform.position;
+            clicked = true;
             Invoke("GoToResult", 1.0f);
         }
     }
@@ -43,10 +43,10 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene("ResultScene");
     }
 
-    public int GetNicheID(List<GameObject> objects)
+    public int GetNicheID()
     {
         //int type_count = System.Enum.GetValues(typeof(TempType)).Length;
-        int type_count = 4; //決め打ち!ｗ
+        int type_count = 5; //決め打ち!ｗ
         int[] counts = new int[type_count];
 
         //Type毎の数をカウント
@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour
         {
             var script = target.GetComponent<Sensei>();
             if (script == null) continue;
-            counts[0]++; //Todo::scriptから番号拾う
+            counts[script.Type]++; 
         }
 
         //ニッチ(一番数が少ないType)を探す
@@ -66,7 +66,7 @@ public class GameManager : MonoBehaviour
             nicheCount = counts[i];
             nicheID = i;
         }
-
+        Debug.Log("ID:" + nicheID + " is niche!!");
         return nicheID;
     }
 }
