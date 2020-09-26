@@ -4,14 +4,16 @@ using UnityEngine;
 
 public class Murase : Sensei
 {
-    private readonly float moveSpeed = 0.03f;
+    private readonly float moveSpeed = 0.02f;
     private Vector2 standardPos;
+    private float originalNum;
 
     // Start is called before the first frame update
     protected override void Start()
     {
         base.Start();
         type = 1;
+        originalNum = Random.Range(0.5f, 2.0f);
 
         standardPos = transform.position;
     }
@@ -37,7 +39,7 @@ public class Murase : Sensei
 
         standardPos += moveDir * moveSpeed;
         transform.position = standardPos
-            + new Vector2(Mathf.Cos(3.14f / 180.0f * (float)counter * 0.5f) * 1.5f, Mathf.Sin(3.14f / 180.0f * (float)counter * 3.0f) * 0.5f);
+            + new Vector2(Mathf.Cos(3.14f / 180.0f * (float)counter * originalNum) * 1.5f, Mathf.Sin(3.14f / 180.0f * (float)counter * originalNum) * 0.5f);
 
         if (standardPos.x >= base.limmitPos.right - 0.5f
             || standardPos.x <= base.limmitPos.left + 0.5f)
