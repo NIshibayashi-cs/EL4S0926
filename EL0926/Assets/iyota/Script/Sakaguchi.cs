@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Murase : Sensei
+public class Sakaguchi : Sensei
 {
     private readonly float moveSpeed = 0.03f;
 
@@ -23,7 +23,7 @@ public class Murase : Sensei
 
     protected override void Move()
     {
-        if(base.counter % 500 == 0)
+        if (base.counter % 600 == 0)
         {
             moveDir.x = Random.Range(-1.0f, 1.0f);
             moveDir.y = Random.Range(-1.0f, 1.0f);
