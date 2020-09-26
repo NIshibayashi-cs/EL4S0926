@@ -8,14 +8,12 @@ public class SimpleFadeIn : MonoBehaviour {
     public float duration;
     Image image;
 
-    [SerializeField]
-    bool fadeIn = true;
+    public bool fadeIn = true;
 
     [SerializeField]
     bool autoStart = false;
 
-    [SerializeField]
-    bool disableInput = false;
+    public bool disableInput = false;
 
     void Start () {
         image = GetComponent<Image>();
