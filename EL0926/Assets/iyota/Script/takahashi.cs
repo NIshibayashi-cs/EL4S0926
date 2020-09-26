@@ -10,6 +10,7 @@ public class takahashi : Sensei
     protected override void Start()
     {
         base.Start();
+        type = 3;
     }
 
     // Update is called once per frame

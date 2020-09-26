@@ -30,6 +30,9 @@ public abstract class Sensei : MonoBehaviour
 
     protected Vector2 moveDir;
     protected int counter;
+    public int Type { get { return type; } }
+    protected int type;
+
 
     // Start is called before the first frame update
     protected virtual void Start()
