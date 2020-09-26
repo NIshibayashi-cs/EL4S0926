@@ -5,16 +5,17 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public enum TempType
-    { 
-        Akiyama,
-        Takahashi,
-        Murase
-    }
+    [SerializeField]
+    GameObject clear_VFX;
+
+    [SerializeField]
+    GameObject failed_VFX;
+
+    bool clicked = false;
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (!clicked && Input.GetMouseButtonDown(0))
         {
             //先生をクリックしたかチェック
             var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -30,8 +31,16 @@ public class GameManager : MonoBehaviour
 
             //フラグセットしてResultへ
             PlayerPrefs.SetInt("GameClear", clear ? 1 : 0);
-            SceneManager.LoadScene("ResultScene");
+            clicked = true;
+            GameObject vfx = Instantiate(clear ? clear_VFX : failed_VFX);
+            vfx.transform.position = hit.transform.position;
+            Invoke("GoToResult", 1.0f);
         }
+    }
+
+    void GoToResult()
+    {
+        SceneManager.LoadScene("ResultScene");
     }
 
     public int GetNicheID(List<GameObject> objects)
@@ -45,8 +54,7 @@ public class GameManager : MonoBehaviour
         {
             var script = target.GetComponent<Sensei>();
             if (script == null) continue;
-            var type = TempType.Akiyama; //Todo:先生オブジェクトからTypeを抽出する
-            counts[(int)type]++;
+            counts[0]++; //Todo::scriptから番号拾う
         }
 
         //ニッチ(一番数が少ないType)を探す
