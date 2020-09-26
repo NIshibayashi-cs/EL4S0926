@@ -5,12 +5,15 @@ using UnityEngine;
 public class Murase : Sensei
 {
     private readonly float moveSpeed = 0.03f;
+    private Vector2 standardPos;
 
     // Start is called before the first frame update
     protected override void Start()
     {
         base.Start();
         type = 1;
+
+        standardPos = transform.position;
     }
 
     // Update is called once per frame
@@ -32,14 +35,16 @@ public class Murase : Sensei
             return;
         }
 
-        transform.position += (Vector3)moveDir * moveSpeed;
+        standardPos += moveDir * moveSpeed;
+        transform.position = standardPos
+            + new Vector2(Mathf.Cos(3.14f / 180.0f * (float)counter * 0.5f) * 1.5f, Mathf.Sin(3.14f / 180.0f * (float)counter * 3.0f) * 0.5f);
 
-        if (transform.position.x >= base.limmitPos.right
-            || transform.position.x <= base.limmitPos.left)
+        if (standardPos.x >= base.limmitPos.right - 0.5f
+            || standardPos.x <= base.limmitPos.left + 0.5f)
             moveDir.x *= -1;
 
-        if (transform.position.y >= base.limmitPos.up
-            || transform.position.y <= base.limmitPos.down)
+        if (standardPos.y >= base.limmitPos.up - 0.5f
+            || standardPos.y <= base.limmitPos.down + 0.5f)
             moveDir.y *= -1;
     }
 }
