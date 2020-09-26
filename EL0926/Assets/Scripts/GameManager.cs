@@ -11,6 +11,9 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     GameObject failed_VFX;
 
+    [SerializeField]
+    SimpleFadeIn fade;
+
     bool clicked = false;
 
     void Update()
@@ -34,8 +37,15 @@ public class GameManager : MonoBehaviour
             GameObject vfx = Instantiate(clear ? clear_VFX : failed_VFX);
             vfx.transform.position = hit.transform.position;
             clicked = true;
-            Invoke("GoToResult", 1.0f);
+            Invoke("FadeOut", 0.5f);
+            Invoke("GoToResult", 1.5f);
         }
+    }
+
+    void FadeOut()
+    {
+        fade.fadeIn = false;
+        fade.StartFade();
     }
 
     void GoToResult()
