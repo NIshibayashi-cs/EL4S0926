@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class takahashi : Sensei
 {
-    private readonly float moveSpeed = 0.03f;
+    private readonly float moveSpeed = 0.02f;
 
     // Start is called before the first frame update
     protected override void Start()
