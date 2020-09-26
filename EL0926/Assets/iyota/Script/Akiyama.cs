@@ -10,6 +10,7 @@ public class Akiyama : Sensei
     protected override void Start()
     {
         base.Start();
+        type = 0;
     }
 
     // Update is called once per frame
